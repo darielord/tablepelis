@@ -9,12 +9,22 @@ function App() {
 
   const state = useMovies(page);
 
+  const totalpages =
+    state.status === "success" ? Math.min(state.data.total_pages, 500) : null;
+
   return (
     <>
       {renderMovies(state)}
-      <button onClick={() => setPage((p) => p - 1)}>Anterior</button>
-      <p> {page}</p>
-      <button onClick={() => setPage((p) => p + 1)}>Siguiente</button>
+      <button onClick={() => setPage((p) => p - 1)} disabled={page === 1}>
+        Anterior
+      </button>
+      <p> Pagina {page}</p>
+      <button
+        onClick={() => setPage((p) => p + 1)}
+        disabled={totalpages === null || page >= totalpages}
+      >
+        Siguiente
+      </button>
     </>
   );
 }
