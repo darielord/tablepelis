@@ -1,12 +1,22 @@
 import { useMovies } from "./useMovies";
 import { renderMovies } from "./renderMovies";
+import { useState } from "react";
 
 import "./App.css";
 
 function App() {
-  const state = useMovies(1);
+  const [page, setPage] = useState(1);
 
-  return <>{renderMovies(state)}</>;
+  const state = useMovies(page);
+
+  return (
+    <>
+      {renderMovies(state)}
+      <button onClick={() => setPage((p) => p - 1)}>Anterior</button>
+      <p> {page}</p>
+      <button onClick={() => setPage((p) => p + 1)}>Siguiente</button>
+    </>
+  );
 }
 
 export default App;
