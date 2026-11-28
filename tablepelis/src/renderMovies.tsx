@@ -4,6 +4,7 @@ import type { RequestState } from "./types";
 import { type MoviesPage } from "./types";
 
 import type { ApiError } from "./types";
+import { MovieCard } from "./MovieCard";
 
 export function renderMovies(
   state: RequestState<MoviesPage, ApiError>,
@@ -30,7 +31,10 @@ export function renderMovies(
       return (
         <ul>
           {state.data.results.map((movie) => (
-            <li key={movie.id}>{movie.title} </li>
+            <li key={movie.id}>
+              {" "}
+              <MovieCard movie={movie} />{" "}
+            </li>
           ))}
         </ul>
       );
